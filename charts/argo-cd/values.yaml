@@ -252,7 +252,7 @@ configs:
     ## Server properties
     # -- Run server without TLS
     ## NOTE: This value should be set when you generate params by other means as it changes ports used by ingress template.
-    server.insecure: false
+    server.insecure: true
     # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different from /
     server.basehref: /
     # -- Used if Argo CD is running behind reverse proxy under subpath different from /
@@ -2000,9 +2000,11 @@ server:
   certificate:
     # -- Deploy a Certificate resource (requires cert-manager)
     enabled: false
+    # -- The name of the Secret that will be automatically created and managed by this Certificate resource
+    secretName: argocd-server-tls
     # -- Certificate primary domain (commonName)
     # @default -- `""` (defaults to global.domain)
-    domain: argocd-helm-self.fun
+    domain: ""
     # -- Certificate Subject Alternate Names (SANs)
     additionalHosts: []
     # -- The requested 'duration' (i.e. lifetime) of the certificate.
@@ -2057,7 +2059,9 @@ server:
   ## Server service configuration
   service:
     # -- Server service annotations
-    annotations: {}
+    annotations: 
+      cloud.google.com/neg: '{"ingress": true}'
+      cloud.google.com/backend-config: '{"ports": {"80":"argo-cd-argocd-server"}}'
     # -- Server service labels
     labels: {}
     # -- Server service type
@@ -3017,6 +3021,8 @@ applicationSet:
   certificate:
     # -- Deploy a Certificate resource (requires cert-manager)
     enabled: false
+    # -- The name of the Secret that will be automatically created and managed by this Certificate resource
+    secretName: argocd-applicationset-controller-tls
     # -- Certificate primary domain (commonName)
     # @default -- `""` (defaults to global.domain)
     domain: argocd-helm-self.fun
