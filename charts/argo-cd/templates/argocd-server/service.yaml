@@ -24,9 +24,6 @@ spec:
   externalTrafficPolicy: {{ .Values.server.service.externalTrafficPolicy }}
   {{- end }}
   {{- if eq .Values.server.service.type "LoadBalancer" }}
-  {{- with .Values.server.service.loadBalancerClass }}
-  loadBalancerClass: {{ . }}
-  {{- end }}
   {{- with .Values.server.service.loadBalancerIP }}
   loadBalancerIP: {{ . }}
   {{- end }}
