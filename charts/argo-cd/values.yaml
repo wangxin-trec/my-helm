@@ -2154,10 +2154,10 @@ server:
   # Argo CD server ingress configuration
   ingress:
     # -- Enable an ingress resource for the Argo CD server
-    enabled: false
+    enabled: true
     # -- Specific implementation for ingress controller. One of `generic`, `aws` or `gke`
     ## Additional configuration might be required in related configuration sections
-    controller: generic
+    controller: gke
     # -- Additional ingress labels
     labels: {}
     # -- Additional ingress annotations
@@ -2171,7 +2171,7 @@ server:
 
     # -- Argo CD server hostname
     # @default -- `""` (defaults to global.domain)
-    hostname: ""
+    hostname: argocd-helm-self.fun
 
     # -- The path to Argo CD server
     path: /
@@ -2244,7 +2244,15 @@ server:
       # -- Google [BackendConfig] resource, for use with the GKE Ingress Controller
       # @default -- `{}` (See [values.yaml])
       ## Ref: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#configuring_ingress_features_through_frontendconfig_parameters
-      backendConfig: {}
+      backendConfig: 
+        healthCheck:
+          checkIntervalSec: 30
+          timeoutSec: 5
+          healthyThreshold: 1
+          unhealthyThreshold: 2
+          type: HTTP
+          requestPath: /healthz
+          port: 8080
         # iap:
         #  enabled: true
         #  oauthclientCredentials:
@@ -2253,7 +2261,10 @@ server:
       # -- Google [FrontendConfig] resource, for use with the GKE Ingress Controller
       # @default -- `{}` (See [values.yaml])
       ## Ref: https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#configuring_ingress_features_through_frontendconfig_parameters
-      frontendConfig: {}
+      frontendConfig: 
+        redirectToHttps:
+          enabled: true
+          responseCodeName: RESPONSE_CODE
         # redirectToHttps:
         #   enabled: true
         #   responseCodeName: RESPONSE_CODE
