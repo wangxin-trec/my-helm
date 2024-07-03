@@ -2002,7 +2002,7 @@ server:
     enabled: false
     # -- Certificate primary domain (commonName)
     # @default -- `""` (defaults to global.domain)
-    domain: ""
+    domain: argocd-helm-self.fun
     # -- Certificate Subject Alternate Names (SANs)
     additionalHosts: []
     # -- The requested 'duration' (i.e. lifetime) of the certificate.
@@ -3008,7 +3008,7 @@ applicationSet:
     enabled: false
     # -- Certificate primary domain (commonName)
     # @default -- `""` (defaults to global.domain)
-    domain: ""
+    domain: argocd-helm-self.fun
     # -- Certificate Subject Alternate Names (SANs)
     additionalHosts: []
     # -- The requested 'duration' (i.e. lifetime) of the certificate.
@@ -3056,7 +3056,7 @@ applicationSet:
 
     # -- Argo CD ApplicationSet hostname
     # @default -- `""` (defaults to global.domain)
-    hostname: ""
+    hostname: argocd-helm-self.fun
 
     # -- List of ingress paths
     path: /api/webhook
@@ -3117,7 +3117,7 @@ notifications:
 
   # -- Argo CD dashboard url; used in place of {{.context.argocdUrl}} in templates
   # @default -- `""` (defaults to https://`global.domain`)
-  argocdUrl: ""
+  argocdUrl: argocd-helm-self.fun
 
   ## Notifications controller Pod Disruption Budget
   ## Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
