@@ -193,6 +193,7 @@ configs:
     # -- Enable Status Badge
     ## Ref: https://argo-cd.readthedocs.io/en/stable/user-guide/status-badge/
     statusbadge.enabled: false
+    url: https://argocd-test.raicart.io
 
     # Dex configuration
     # dex.config: |
