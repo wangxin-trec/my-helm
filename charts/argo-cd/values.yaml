@@ -193,9 +193,18 @@ configs:
     # -- Enable Status Badge
     ## Ref: https://argo-cd.readthedocs.io/en/stable/user-guide/status-badge/
     statusbadge.enabled: false
-    url: https://argocd-test.raicart.io
-
     # Dex configuration
+    ## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/google/#openid-connect-using-dex
+    url: https://argocd-test.raicart.io
+    dex.config: |
+      connectors:
+      - config:
+          issuer: https://accounts.google.com
+          clientID: 495370126123-k8mh0a42aueseq2fm2rcn2qd0jvnagqr.apps.googleusercontent.com
+          clientSecret: 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
+        type: oidc
+        id: google
+        name: Google
     # dex.config: |
     #   connectors:
     #     # GitHub example
@@ -302,26 +311,25 @@ configs:
 
     # -- The name of the default role which Argo CD will falls back to, when authorizing API requests (optional).
     # If omitted or empty, users may be still be able to login, but will see no apps, projects, etc...
-    policy.default: ''
+    policy.default: role:readonly
 
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
-    policy.csv: ''
+    # policy.csv: ''
     # Policy rules are in the form:
     #  p, subject, resource, action, object, effect
     # Role definitions and bindings are in the form:
     #  g, subject, inherited-subject
-    # policy.csv: |
-    #   p, role:org-admin, applications, *, */*, allow
-    #   p, role:org-admin, clusters, get, *, allow
-    #   p, role:org-admin, repositories, *, *, allow
-    #   p, role:org-admin, logs, get, *, allow
-    #   p, role:org-admin, exec, create, */*, allow
-    #   g, your-github-org:your-team, role:org-admin
+    policy.csv: |
+      p, role:org-admin, applications, *, */*, allow
+      p, role:org-admin, clusters, get, *, allow
+      p, role:org-admin, repositories, *, *, allow
+      p, role:org-admin, logs, get, *, allow
+      p, role:org-admin, exec, create, */*, allow
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
-    scopes: "[groups]"
+    scopes: '[cognito:groups, email]'
 
     # -- Matcher function for Casbin, `glob` for glob matcher and `regex` for regex matcher.
     policy.matchMode: "glob"
