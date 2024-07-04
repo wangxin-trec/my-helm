@@ -2059,7 +2059,7 @@ server:
     # -- Server service annotations
     annotations: 
       cloud.google.com/neg: '{"ingress": true}'
-      cloud.google.com/backend-config: '{"ports": {"80":"argo-cd-argocd-server"}}'
+      cloud.google.com/backend-config: '{"ports": {"80":"argocd-server"}}'
     # -- Server service labels
     labels: {}
     # -- Server service type
@@ -2171,7 +2171,7 @@ server:
 
     # -- Argo CD server hostname
     # @default -- `""` (defaults to global.domain)
-    hostname: argocd-helm-self.fun
+    hostname: argocd-test.raicart.io
 
     # -- The path to Argo CD server
     path: /
@@ -3021,7 +3021,7 @@ applicationSet:
     secretName: argocd-applicationset-controller-tls
     # -- Certificate primary domain (commonName)
     # @default -- `""` (defaults to global.domain)
-    domain: argocd-helm-self.fun
+    domain: argocd-test.raicart.io
     # -- Certificate Subject Alternate Names (SANs)
     additionalHosts: []
     # -- The requested 'duration' (i.e. lifetime) of the certificate.
@@ -3069,7 +3069,7 @@ applicationSet:
 
     # -- Argo CD ApplicationSet hostname
     # @default -- `""` (defaults to global.domain)
-    hostname: argocd-helm-self.fun
+    hostname: argocd-test.raicart.io
 
     # -- List of ingress paths
     path: /api/webhook
@@ -3130,7 +3130,7 @@ notifications:
 
   # -- Argo CD dashboard url; used in place of {{.context.argocdUrl}} in templates
   # @default -- `""` (defaults to https://`global.domain`)
-  argocdUrl: argocd-helm-self.fun
+  argocdUrl: argocd-test.raicart.io
 
   ## Notifications controller Pod Disruption Budget
   ## Ref: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
