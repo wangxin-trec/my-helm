@@ -214,8 +214,6 @@ configs:
           config:
             clientID: Ov23liCjGH6RKD7Khy7w
             clientSecret: cfaecef7aa61fe71f45cc90397da4acc8afcdb0f
-            orgs:
-            - name: retail-ai-inc
 
     # OIDC configuration as an alternative to dex (optional).
     # oidc.config: |
