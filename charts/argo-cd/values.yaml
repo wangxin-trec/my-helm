@@ -213,7 +213,7 @@ configs:
           name: GitHub
           config:
             clientID: Ov23liCjGH6RKD7Khy7w
-            clientSecret: cfaecef7aa61fe71f45cc90397da4acc8afcdb0f
+            clientSecret: $github.auth0.clientSecret
 
     # OIDC configuration as an alternative to dex (optional).
     # oidc.config: |
@@ -560,7 +560,7 @@ configs:
     ## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/#sensitive-data-and-sso-client-secrets
     ## Note that all values must be non-empty.
     extra:
-      {}
+      github.auth0.clientSecret: cfaecef7aa61fe71f45cc90397da4acc8afcdb0f
       # LDAP_PASSWORD: "mypassword"
 
     # -- Bcrypt hashed admin password
