@@ -196,26 +196,26 @@ configs:
     # Dex configuration
     ## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/google/#openid-connect-using-dex
     url: https://argocd-test.raicart.io
-    dex.config: |
-      connectors:
-      - config:
-          issuer: https://accounts.google.com
-          clientID: 495370126123-k8mh0a42aueseq2fm2rcn2qd0jvnagqr.apps.googleusercontent.com
-          clientSecret: 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
-        type: oidc
-        id: google
-        name: Google
     # dex.config: |
     #   connectors:
-    #     # GitHub example
-    #     - type: github
-    #       id: github
-    #       name: GitHub
-    #       config:
-    #         clientID: aabbccddeeff00112233
-    #         clientSecret: $dex.github.clientSecret # Alternatively $<some_K8S_secret>:dex.github.clientSecret
-    #         orgs:
-    #         - name: your-github-org
+    #   - config:
+    #       issuer: https://accounts.google.com
+    #       clientID: 495370126123-k8mh0a42aueseq2fm2rcn2qd0jvnagqr.apps.googleusercontent.com
+    #       clientSecret: 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
+    #     type: oidc
+    #     id: google
+    #     name: Google
+    dex.config: |
+      connectors:
+        # GitHub example
+        - type: github
+          id: github
+          name: GitHub
+          config:
+            clientID: Ov23liCjGH6RKD7Khy7w
+            clientSecret: cfaecef7aa61fe71f45cc90397da4acc8afcdb0f
+            orgs:
+            - name: retail-ai-inc
 
     # OIDC configuration as an alternative to dex (optional).
     # oidc.config: |
